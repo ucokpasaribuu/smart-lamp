@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lamps List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let lamp of lampList">
+      <ion-label>
+        <h2>{{ lamp.bat_name }}</h2>
+        <h3>{{ lamp.device_code }}</h3>
+        <ion-toggle slot="start" name="status" color="success" [checked]="lamp.status === 1 ? true : false" (ionChange)="changeStatus($event)"></ion-toggle>
+        <p>{{ lamp.site }}...</p>
+      </ion-label>
+      <div class="ion-text-right ion-padding">
+        <ion-button fill="clear" color="primary">More</ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
