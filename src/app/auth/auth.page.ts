@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -10,13 +11,15 @@ import { Router } from '@angular/router';
 export class AuthPage implements OnInit {
   isLogin = true;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router, 
+    private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
+    this.authService.login(true);
     this.router.navigateByUrl('/lamps/tabs/lamp-list');
   }
 }
