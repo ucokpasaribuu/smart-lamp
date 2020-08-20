@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/lamps/tabs/lamp-list'"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ lampDetail.bat_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col class="ion-text-center ion-padding">
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <ion-item lines="none">
+          <ion-label>BAT Name:</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="7">
+        <ion-item lines="none">
+          <label>{{ lampDetail.bat_name }}</label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">
+        <ion-item lines="none">
+          <ion-label>Status:</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="7">
+        <ion-item lines="none">
+          <ion-buttons slot="start">
+            <ion-button (click)="changeStatus(lampDetail.device_code, lampDetail.status)">
+              <ion-icon slot="icon-only" name="sunny-outline" [color]="lampDetail.status === 1 ? 'success' : 'danger'"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">
+        <ion-item lines="none">
+          <ion-label>Device Code:</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="7">
+        <ion-item lines="none">
+          <ion-label>{{ lampDetail.device_code }}</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">
+        <ion-item lines="none">
+          <ion-label>Site:</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="7">
+        <ion-item lines="none">
+          <ion-text>{{ lampDetail.site }}</ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">
+        <ion-item lines="none">
+          <ion-label>Site Detail:</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="7">
+        <ion-item lines="none">
+          <ion-text>{{ lampDetail.site_detail }}</ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button [color]="lampDetail.status === 1 ? 'danger' : 'success'" expand="block" (click)="changeStatus(lampDetail.device_code, lampDetail.status)">Turn {{ lampDetail.status === 1 ? 'OFF' : 'ON' }} Lamp</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

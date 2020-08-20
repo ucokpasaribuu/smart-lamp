@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Lamp List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment class="ion-padding" (ionChange)="segmentChange($event)" [value]="filter">
+    <ion-segment-button value="all" checked>
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="site">
+      <ion-label>Site</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-list>
+    <ion-item lines="none" *ngIf="!isAll" class="ion-margin" color="light">
+      <ion-label>Select Site</ion-label>
+      <ion-select (ionChange)="changeFilterSite($event)" [value]="allSite[0].site_code">
+        <ion-select-option *ngFor="let site of allSite" [value]="site.site_code">{{ site.site_name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngFor="let lamp of lampList; let i = index">
+      <ion-label>
+        <h2>{{ lamp.bat_name }}</h2>
+        <!-- <ion-toggle slot="start" name="status" color="success" [checked]="lamp.status === 1 ? true : false" (ionChange)="changeStatus($event, lamp.device_code)"></ion-toggle> -->
+        <ion-buttons slot="start">
+          <ion-button (click)="changeStatus(lamp.status, lamp.device_code)">
+            <ion-icon slot="icon-only" name="sunny-outline" [color]="lamp.status === 1 ? 'success' : 'danger'"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <h3>{{ lamp.device_code }}</h3>
+        <p>{{ lamp.site }} ...</p>
+      </ion-label>
+      <div class="ion-text-right ion-padding">
+        <ion-button 
+                    fill="clear" 
+                    color="primary"
+                    [routerLink]="['/' ,'lamps', 'tabs', 'lamp-detail', lamp.device_code]">More</ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

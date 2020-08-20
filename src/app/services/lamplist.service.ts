@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LampList } from 'src/models/LampList.model';
 import { BehaviorSubject } from 'rxjs';
-import { tap, take, switchMap, map } from 'rxjs/operators';
+import { tap, take, switchMap, map, filter } from 'rxjs/operators';
+import { SiteModel } from 'src/models/Site.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class LamplistService {
       'Lampu Tidur',
       'WTCBAT2020062500001',
       'Kosan Tebet, Jl, Tebet Barat No. 106 J',
+      'tebet',
       'Floor = 2, Room = 4, Spot = Atas Meja Komputer',
       1
     ),
@@ -19,30 +21,49 @@ export class LamplistService {
       'Lampu Belajar',
       'WTCBAT2020062500002',
       'Kosan Tebet, Jl, Tebet Barat No. 106 J',
-      'Floor = 2, Room = 4, Spot = Atas Meja Komputer',
+      'tebet',
+      'Floor = 2, Room = 4, Spot = Atas Meja Komputer Floor = 2, Room = 4, Spot = Atas Meja Komputer',
       2
     ),
     new LampList(
       'Lampu A',
       'WTCBAT2020062500003',
-      'Kosan Tebet, Jl, Tebet Barat No. 106 J',
+      'Kosan depok, Jl, depok Barat No. 106 J',
+      'depok',
       'Floor = 2, Room = 4, Spot = Atas Meja A',
       2
     ),
     new LampList(
       'Lampu B',
       'WTCBAT2020062500004',
-      'Kosan Tebet, Jl, Tebet Barat No. 106 J',
+      'Kosan depok, Jl, depok Barat No. 106 J',
+      'depok',
       'Floor = 2, Room = 4, Spot = Atas Meja B',
       1
     ),
     new LampList(
       'Lampu C',
       'WTCBAT2020062500005',
-      'Kosan Tebet, Jl, Tebet Barat No. 106 J',
+      'Kosan depok, Jl, depok Barat No. 106 J',
+      'depok',
       'Floor = 2, Room = 4, Spot = Atas Meja C',
       2
     ),
+  ]);
+
+  sites = new BehaviorSubject<SiteModel[]>([
+    new SiteModel(
+      'depok',
+      'Depok',
+      'Kosan depok, Jl, depok Barat No. 106 J',
+      'Floor = 2, Room = 4, Spot = Atas Meja C'
+    ),
+    new SiteModel(
+      'tebet',
+      'Tebet',
+      'Kosan depok, Jl, depok Barat No. 106 J',
+      'Floor = 2, Room = 4, Spot = Atas Meja C'
+    )
   ]);
 
   constructor() { }
@@ -51,9 +72,22 @@ export class LamplistService {
     return this.lamps.asObservable();
   }
 
-  updateStatusLamp(deviceCode, status) {
-    let updateStatus = status === true ? 1 : 2;
+  get getSites() {
+    return this.sites.asObservable();
+  }
 
+  lampDetail(deviceCode) {
+    return this.getLampList.pipe(
+      take(1),
+      map(lampDetail => {
+        let indexLamp = lampDetail.findIndex(lamp => lamp.device_code === deviceCode);
+        
+        return lampDetail[indexLamp];
+      })
+    );
+  }
+
+  updateStatusLamp(deviceCode, status) {
     return this.getLampList.pipe(
       take(1),
       map(lampList => {
@@ -66,8 +100,9 @@ export class LamplistService {
           oldLamp.bat_name,
           oldLamp.device_code,
           oldLamp.site,
+          oldLamp.site_code,
           oldLamp.site_detail,
-          updateStatus
+          +status
         );
 
         return updatedLampList;
@@ -76,5 +111,18 @@ export class LamplistService {
         this.lamps.next(updateLampList);
       })
     );
+  }
+
+  filterLampList(value) {
+    if (value === 'all') {
+      return this.getLampList;
+    } else {
+      return this.lamps.pipe(
+        take(1),
+        map(lampList => {
+          return lampList.filter(lamp => lamp.site_code === value);
+        })
+      )
+    }
   }
 }

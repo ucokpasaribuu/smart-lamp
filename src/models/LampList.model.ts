@@ -3,6 +3,7 @@ export class LampList {
         public bat_name: string,
         public device_code: string,
         public site: string,
+        public site_code: string,
         public site_detail: string,
         public status: number,
     ) {}
