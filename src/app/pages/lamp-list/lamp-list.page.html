@@ -1,16 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Lamps List</ion-title>
+    <ion-title>Lamp List</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let lamp of lampList">
+    <ion-item *ngFor="let lamp of lampList; let i = index">
       <ion-label>
         <h2>{{ lamp.bat_name }}</h2>
         <h3>{{ lamp.device_code }}</h3>
-        <ion-toggle slot="start" name="status" color="success" [checked]="lamp.status === 1 ? true : false" (ionChange)="changeStatus($event)"></ion-toggle>
+        <ion-toggle slot="start" name="status" color="success" [checked]="lamp.status === 1 ? true : false" (ionChange)="changeStatus($event, lamp.device_code)"></ion-toggle>
         <p>{{ lamp.site }}...</p>
       </ion-label>
       <div class="ion-text-right ion-padding">
