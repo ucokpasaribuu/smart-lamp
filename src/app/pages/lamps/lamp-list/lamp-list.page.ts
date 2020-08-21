@@ -13,6 +13,7 @@ import { SiteModel } from 'src/models/Site.model';
 export class LampListPage implements OnInit {
   lampList: LampList[];
   filter = 'all';
+  filterSite = 'all';
   isAll = true;
   allSite: SiteModel[];
 
@@ -26,13 +27,10 @@ export class LampListPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.lampListService.getLampList.subscribe(data => {
-      this.lampList = data;
-    });
+    this.filterLampList(this.filterSite);
 
     this.lampListService.getSites.subscribe(allSites => {
       this.allSite = allSites;
-      console.log(this.allSite);
     })
   }
 
@@ -75,29 +73,30 @@ export class LampListPage implements OnInit {
 
   segmentChange(value: CustomEvent<any>) {
     this.filter = value.detail.value;
-    console.log(value.detail.value === 'all', value.detail.value);
 
     if (value.detail.value === 'all') {
       this.isAll = true;
+      this.filterSite = 'all';
       this.filterLampList(value)
     } else {
       this.isAll = false;
-      this.filterLampList(value);
+      this.filterSite = this.allSite[0].site_code;
+      this.filterLampList(this.filterSite);
     }
   }
 
   changeFilterSite(value: CustomEvent<any>) {
-    this.filterLampList(value);
+    this.filterSite = value.detail.value;
+
+    this.filterLampList(this.filterSite);
   }
 
-  filterLampList(value) {
-    let getValue = value.detail.value === 'site' ? this.allSite[0].site_code : value.detail.value;
-    console.log(getValue)
+  filterLampList(value) {    
     this.loadingCtrl.create({
       message: 'Fetching Lamp List ...'
     }).then(loadingEl => {
       loadingEl.present();
-      this.lampListService.filterLampList(getValue).subscribe(fetchLampList => {
+      this.lampListService.filterLampList(this.filterSite).subscribe(fetchLampList => {
         this.lampList = fetchLampList;
         loadingEl.dismiss();
       });

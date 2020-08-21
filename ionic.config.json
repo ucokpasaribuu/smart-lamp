@@ -1,5 +1,7 @@
 {
   "name": "smart-lamp",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -21,7 +21,7 @@ export class LampDetailPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.lampListService.lampDetail(params.id).subscribe(data => {
+      this.lampListService.lampDetail(params.deviceCode).subscribe(data => {
         this.lampDetail = data;
         this.isLoading = false;
       });

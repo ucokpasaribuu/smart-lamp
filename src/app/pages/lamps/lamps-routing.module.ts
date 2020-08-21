@@ -13,7 +13,16 @@ const routes: Routes = [
         children: [
           {
             path: 'lamp-list',
-            loadChildren: () => import('./lamp-list/lamp-list.module').then(m => m.LampListPageModule)
+            children: [
+              {
+                path: '',
+                loadChildren: () => import('./lamp-list/lamp-list.module').then(m => m.LampListPageModule)
+              },
+              {
+                path: ':deviceCode',
+                loadChildren: () => import('./lamp-detail/lamp-detail.module').then(m => m.LampDetailPageModule)
+              },
+            ]
           },
           {
             path: 'logout',
