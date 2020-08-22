@@ -16,6 +16,7 @@ export class LampListPage implements OnInit {
   isAll = true;
   allSite: SiteModel[];
   currentUrl: string;
+  reloadFilterSite = false;
 
   constructor(
     private lampListService: LamplistService,
@@ -30,7 +31,7 @@ export class LampListPage implements OnInit {
     this.lampListService.getSites.subscribe(allSites => {
       this.allSite = allSites;
 
-      if ((this.router.url === '/lamps/tabs/sites')) {
+      if ((this.router.url === '/lamps/tabs/sites') && !this.reloadFilterSite) {
         this.filterSite = this.allSite[0].site_code;
         this.isAll = false;
       }
@@ -72,21 +73,14 @@ export class LampListPage implements OnInit {
     }).then(loadingEl => {
       loadingEl.present();
       this.lampListService.updateStatusLamp(deviceCode, value).subscribe(updateLampList => {
+        if (this.filterSite !== 'all') {
+          this.reloadFilterSite = true;
+          this.ionViewWillEnter();
+        }
+
         loadingEl.dismiss();
       });
     });
-  }
-
-  segmentChange(value: CustomEvent<any>) {
-    if (value.detail.value === 'all') {
-      this.isAll = true;
-      this.filterSite = 'all';
-      this.filterLampList(value)
-    } else {
-      this.isAll = false;
-      this.filterSite = this.allSite[0].site_code;
-      this.filterLampList(this.filterSite);
-    }
   }
 
   changeFilterSite(value: CustomEvent<any>) {
