@@ -16,27 +16,4 @@ export class LampsPage implements OnInit {
   ngOnInit() {
   }
 
-  onLogout() {
-    this.alertCtrl.create({
-      header: 'Are you sure to logout?',
-      buttons: [
-        {
-          text: 'Logout',
-          handler: () => {
-            this.router.navigateByUrl('/auth');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            this.router.navigateByUrl('/lamps/tabs/lamp-list');
-          }
-        }
-      ]
-    }).then(alertEl => {
-      alertEl.present();
-    })
-  }
-
 }

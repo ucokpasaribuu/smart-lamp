@@ -25,7 +25,7 @@ const routes: Routes = [
             ]
           },
           {
-            path: 'logout',
+            path: 'sites',
             loadChildren: () => import('./lamp-list/lamp-list.module').then(m => m.LampListPageModule)
           }
         ]

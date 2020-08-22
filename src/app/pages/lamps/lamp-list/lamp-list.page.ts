@@ -12,7 +12,6 @@ import { SiteModel } from 'src/models/Site.model';
 })
 export class LampListPage implements OnInit {
   lampList: LampList[];
-  filter = 'all';
   filterSite = 'all';
   isAll = true;
   allSite: SiteModel[];
@@ -27,11 +26,16 @@ export class LampListPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.filterLampList(this.filterSite);
-
     this.lampListService.getSites.subscribe(allSites => {
       this.allSite = allSites;
-    })
+
+      if ((this.router.url === '/lamps/tabs/sites')) {
+        this.filterSite = this.allSite[0].site_code;
+        this.isAll = false;
+      }
+
+      this.filterLampList(this.filterSite);
+    });
   }
 
   changeStatus(status, deviceCode) {
@@ -51,7 +55,7 @@ export class LampListPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            
+            this.updateLampStatus(deviceCode, status);
           }
         }
       ]
@@ -72,8 +76,6 @@ export class LampListPage implements OnInit {
   }
 
   segmentChange(value: CustomEvent<any>) {
-    this.filter = value.detail.value;
-
     if (value.detail.value === 'all') {
       this.isAll = true;
       this.filterSite = 'all';
@@ -101,6 +103,29 @@ export class LampListPage implements OnInit {
         loadingEl.dismiss();
       });
     });
+  }
+
+  onLogout() {
+    this.alertCtrl.create({
+      header: 'Are you sure to logout?',
+      buttons: [
+        {
+          text: 'Logout',
+          handler: () => {
+            this.router.navigateByUrl('/auth');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.router.navigateByUrl('/lamps/tabs/lamp-list');
+          }
+        }
+      ]
+    }).then(alertEl => {
+      alertEl.present();
+    })
   }
 
 }
