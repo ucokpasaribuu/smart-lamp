@@ -15,6 +15,7 @@ export class LampListPage implements OnInit {
   filterSite = 'all';
   isAll = true;
   allSite: SiteModel[];
+  currentUrl: string;
 
   constructor(
     private lampListService: LamplistService,
@@ -35,6 +36,7 @@ export class LampListPage implements OnInit {
       }
 
       this.filterLampList(this.filterSite);
+      this.currentUrl = this.router.url;
     });
   }
 

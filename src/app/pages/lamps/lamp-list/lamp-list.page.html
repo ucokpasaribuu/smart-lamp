@@ -32,7 +32,7 @@
             </ion-card-title>
           </ion-card-header>
         
-          <ion-card-content [routerLink]="['/' ,'lamps', 'tabs', 'lamp-list', lamp.device_code]">
+          <ion-card-content [routerLink]="[currentUrl, lamp.device_code]">
             <p>{{ lamp.site }} ...</p>
             <div class="ion-text-center">
               <ion-button 
