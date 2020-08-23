@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LamplistService } from 'src/app/services/lamplist.service';
 import { LampList } from 'src/models/LampList.model';
 import { LoadingController, AlertController } from '@ionic/angular';
@@ -17,18 +17,20 @@ export class LampDetailPage implements OnInit {
     private route: ActivatedRoute,
     private lampListService: LamplistService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.lampListService.lampDetail(params.deviceCode).subscribe(data => {
         this.lampDetail = data;
+
         this.isLoading = false;
       });
     });
   }
 
-  changeStatus(deviceCode, status) {
+  changeStatus(status, deviceCode) {
     let changeStatus = status === 1 ? 'off' : 'on';
     let updateStatus = status === 1 ? 2 : 1;
 
@@ -42,8 +44,8 @@ export class LampDetailPage implements OnInit {
               message: 'Updating Lamp Status ...'
             }).then(loadingEl => {
               loadingEl.present();
-              this.lampListService.updateStatusLamp(deviceCode, updateStatus).subscribe(updateLampList => {
-                this.lampDetail = updateLampList.find(lamp => lamp.device_code === deviceCode);
+              this.lampListService.updateStatusLamp(deviceCode, updateStatus).subscribe(() => {
+                this.ngOnInit();
                 
                 loadingEl.dismiss();
               });
@@ -53,10 +55,23 @@ export class LampDetailPage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {}
+          handler: () => {
+            this.loadingCtrl.create({
+              message: 'Canceling Lamp Status ...'
+            }).then(loadingEl => {
+              loadingEl.present();
+              
+              this.lampListService.updateStatusLamp(deviceCode, status).subscribe(() => {
+                this.ngOnInit();
+
+                loadingEl.dismiss();
+              });
+            });
+          }
         }
       ]
     }).then(alertEl => {
+      this.lampDetail.status = updateStatus;
       alertEl.present();
     })
   }
