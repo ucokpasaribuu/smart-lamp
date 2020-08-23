@@ -25,10 +25,12 @@ export class LampListPage implements OnInit {
     private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+    this.currentUrl = this.router.url;
   }
 
   ionViewWillEnter() {
-    console.log('ionViewWillEnter');
+    this.currentUrl = this.router.url;
+
     this.lampListService.getSites.subscribe(allSites => {
       this.allSite = allSites;
 
@@ -116,11 +118,12 @@ export class LampListPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            this.router.navigateByUrl('/lamps/tabs/lamp-list');
+            this.router.navigateByUrl(this.currentUrl);
           }
         }
       ]
     }).then(alertEl => {
+      this.router.navigateByUrl(this.currentUrl);
       alertEl.present();
     })
   }
