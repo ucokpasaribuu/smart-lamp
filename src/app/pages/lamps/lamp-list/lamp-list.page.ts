@@ -5,6 +5,10 @@ import { AlertController, LoadingController, ActionSheetController } from '@ioni
 import { Router } from '@angular/router';
 import { SiteModel } from 'src/models/Site.model';
 
+import { IonRouterOutlet, Platform } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
+const { App } = Plugins;
+
 @Component({
   selector: 'app-lamp-list',
   templateUrl: './lamp-list.page.html',
@@ -22,10 +26,18 @@ export class LampListPage implements OnInit {
     private lampListService: LamplistService,
     private alertCtrl: AlertController,
     private router: Router,
-    private loadingCtrl: LoadingController) { }
+    private loadingCtrl: LoadingController,
+    private platform: Platform,
+    private routerOutlet: IonRouterOutlet) { }
 
   ngOnInit() {
     this.currentUrl = this.router.url;
+
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet.canGoBack()) {
+        App.exitApp();
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -75,7 +87,7 @@ export class LampListPage implements OnInit {
       message: 'Updating Lamp Status ...'
     }).then(loadingEl => {
       loadingEl.present();
-      this.lampListService.updateStatusLamp(deviceCode, value).subscribe(updateLampList => {
+      this.lampListService.updateStatusLamp(deviceCode, value).subscribe(() => {
         if (this.filterSite !== 'all') {
           this.reloadFilterSite = true;
           this.ionViewWillEnter();
@@ -88,16 +100,19 @@ export class LampListPage implements OnInit {
 
   changeFilterSite(value: CustomEvent<any>) {
     this.filterSite = value.detail.value;
+    this.reloadFilterSite = true;
 
     this.filterLampList(this.filterSite);
+
+    this.currentUrl = this.router.url;
   }
 
-  filterLampList(value) {    
+  filterLampList(value) {
     this.loadingCtrl.create({
       message: 'Fetching Lamp List ...'
     }).then(loadingEl => {
       loadingEl.present();
-      this.lampListService.filterLampList(this.filterSite).subscribe(fetchLampList => {
+      this.lampListService.filterLampList(value).subscribe(fetchLampList => {
         this.lampList = fetchLampList;
         loadingEl.dismiss();
       });
@@ -118,12 +133,10 @@ export class LampListPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            this.router.navigateByUrl(this.currentUrl);
           }
         }
       ]
     }).then(alertEl => {
-      this.router.navigateByUrl(this.currentUrl);
       alertEl.present();
     })
   }

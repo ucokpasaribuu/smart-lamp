@@ -14,7 +14,7 @@
       <ion-col>
         <ion-item lines="none" *ngIf="!isAll" class="ion-margin" color="light">
           <ion-label>Select Site</ion-label>
-          <ion-select (ionChange)="changeFilterSite($event)" [value]="allSite[0].site_code">
+          <ion-select (ionChange)="changeFilterSite($event)" [value]="filterSite">
             <ion-select-option *ngFor="let site of allSite" [value]="site.site_code">{{ site.site_name }}</ion-select-option>
           </ion-select>
         </ion-item>
