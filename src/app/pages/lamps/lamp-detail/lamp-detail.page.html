@@ -74,6 +74,28 @@
         <ion-text>{{ lampDetail.site_detail }}</ion-text>
       </ion-col>
     </ion-row>
+    <ion-row class="ion-justify-content-center ion-margin-top">
+      <ion-col size="6">
+        <ion-card class="ion-padding">
+          <div class="ion-text-center" (click)="ionDateTimeSet()">
+            <ion-label>
+              <ion-icon name="alarm-outline" style="font-size: 40px;"></ion-icon>
+            </ion-label>
+            <ion-datetime id="ionDateTime" [pickerOptions] = "customPickerOptions" (click)="setScheduler($event.target.value)" display-format="h:mm A" picker-format="h:mm A" [value]="today"></ion-datetime>
+          </div>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="ion-padding">
+          <ion-tab-button class="ion-text-center">
+            <ion-label style="font-size: 40px;">
+              <ion-icon name="list-outline"></ion-icon>
+            </ion-label>
+            <ion-text style="font-size: 14px;">View Scheduler</ion-text>
+          </ion-tab-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </ion-grid>
   <ion-grid></ion-grid>
 </ion-content>

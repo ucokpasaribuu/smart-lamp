@@ -18,6 +18,12 @@ export class AuthPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+    if (this.authService.isAuth) {
+      this.router.navigateByUrl('lamps/tabs/lamp-list');
+    }
+  }
+
   onSubmit(form: NgForm) {
     this.authService.login(true);
     this.router.navigateByUrl('/lamps/tabs/lamp-list');

@@ -10,8 +10,12 @@ import { LoadingController, AlertController, PickerController } from '@ionic/ang
   styleUrls: ['./lamp-detail.page.scss'],
 })
 export class LampDetailPage implements OnInit {
+
   isLoading = true;
   lampDetail: LampList;
+  today: string;
+  customPickerOptions: any;
+  timeScheduler: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,7 +23,23 @@ export class LampDetailPage implements OnInit {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private router: Router,
-    private pickerCtrl: PickerController) { }
+    private pickerCtrl: PickerController) { 
+      this.customPickerOptions = {
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: () => {
+            }
+          },
+          {
+            text: 'Save',
+            handler: () => {
+              console.log(this.timeScheduler);
+            }
+          }
+        ]
+      }  
+    }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -27,12 +47,13 @@ export class LampDetailPage implements OnInit {
         this.lampDetail = data;
 
         this.isLoading = false;
+        this.today = new Date().toISOString();
       });
     });
   }
 
-  ionViewWillEnter() {
-    console.log('ionViewWillEnter');
+  ionDateTimeSet() {
+    document.getElementById('ionDateTime').click();
   }
 
   changeStatus(status, deviceCode) {
@@ -79,6 +100,10 @@ export class LampDetailPage implements OnInit {
       this.lampDetail.status = updateStatus;
       alertEl.present();
     })
+  }
+
+  setScheduler(value) {
+    this.timeScheduler = value;
   }
 
 }
