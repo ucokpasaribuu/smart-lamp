@@ -1,6 +1,7 @@
 <ion-content class="ion-padding ion-margin-vertical">
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <ion-grid>
+    <ion-grid id="top"></ion-grid>
+    <ion-grid id="mid">
       <ion-row class="ion-margin ion-justify-content-center">
           <ion-col size="12">
             <ion-img src="https://cnet4.cbsistatic.com/img/FhR7EWdrOFBm8_5R7rSlAyug89U=/940x528/2019/07/26/6e2a7516-91b8-4818-8a8d-5db444bc2f54/wyze-bulb-2-720.jpg"></ion-img>
@@ -42,5 +43,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-grid id="bottom"></ion-grid>
   </form>
 </ion-content>

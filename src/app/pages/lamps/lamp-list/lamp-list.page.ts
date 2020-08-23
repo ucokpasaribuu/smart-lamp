@@ -28,6 +28,7 @@ export class LampListPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    console.log('ionViewWillEnter');
     this.lampListService.getSites.subscribe(allSites => {
       this.allSite = allSites;
 
@@ -63,6 +64,9 @@ export class LampListPage implements OnInit {
         }
       ]
     }).then(alertEl => {
+      // let selectIndexLamp = this.lampList.findIndex(lamp => lamp.device_code === deviceCode);
+      // this.lampList[selectIndexLamp].status = updateStatus;
+
       alertEl.present();
     })
   }

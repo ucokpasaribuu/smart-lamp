@@ -26,7 +26,7 @@
           <ion-card-header>
             <ion-card-title class="ion-text-center">
               <ion-label>
-                <ion-toggle slot="start" name="status" color="success" [checked]="lamp.status === 1 ? true : false" (ionChange)="changeStatus(lamp.status, lamp.device_code)"></ion-toggle>
+                <ion-toggle slot="start" name="status" color="success" [checked]="lamp.status === 1 ? true : false" (click)="changeStatus(lamp.status, lamp.device_code)"></ion-toggle>
                 <h2>{{ lamp.bat_name }}</h2>
               </ion-label>
             </ion-card-title>

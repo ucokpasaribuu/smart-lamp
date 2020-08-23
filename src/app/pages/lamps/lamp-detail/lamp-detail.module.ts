@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { LampDetailPageRoutingModule } from './lamp-detail-routing.module';
 
 import { LampDetailPage } from './lamp-detail.page';
-import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 
 @NgModule({
   imports: [
@@ -16,6 +15,6 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
     IonicModule,
     LampDetailPageRoutingModule
   ],
-  declarations: [LampDetailPage, ToggleButtonComponent]
+  declarations: [LampDetailPage]
 })
 export class LampDetailPageModule {}

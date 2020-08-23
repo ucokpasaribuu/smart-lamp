@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LamplistService } from 'src/app/services/lamplist.service';
 import { LampList } from 'src/models/LampList.model';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, PickerController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lamp-detail',
@@ -18,7 +18,8 @@ export class LampDetailPage implements OnInit {
     private lampListService: LamplistService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    private router: Router) { }
+    private router: Router,
+    private pickerCtrl: PickerController) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -28,6 +29,10 @@ export class LampDetailPage implements OnInit {
         this.isLoading = false;
       });
     });
+  }
+
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter');
   }
 
   changeStatus(status, deviceCode) {
