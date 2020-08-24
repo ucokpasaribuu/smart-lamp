@@ -12,8 +12,8 @@ export class ScheduleService {
         return this.timeSchedule.asObservable();
     }
 
-    addSchedule(data: string) {
-        let dataAdded = new Schedule(data);
+    addSchedule(data: string, deviceCode: string) {
+        let dataAdded = new Schedule(data, deviceCode);
 
         return this.allSchedule.pipe(
             take(1),

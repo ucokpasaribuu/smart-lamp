@@ -41,7 +41,7 @@ export class LampDetailPage implements OnInit {
             text: 'Save',
             handler: (value) => {
               let dataTimePick = `${value.hour.text} ${value.minute.text} ${value.ampm.text}`;
-              this.scheduleService.addSchedule(dataTimePick).subscribe(data => {
+              this.scheduleService.addSchedule(dataTimePick, this.lampDetail.device_code).subscribe(data => {
               });
             }
           }
@@ -119,7 +119,8 @@ export class LampDetailPage implements OnInit {
   openScheduleList() {
     console.log('open schedule list');
     this.modalCtrl.create({
-      component: ScheduleListComponent
+      component: ScheduleListComponent,
+      componentProps: {deviceCode: this.lampDetail.device_code}
     }).then(modalEl => {
       modalEl.present();
       return modalEl.onDidDismiss();

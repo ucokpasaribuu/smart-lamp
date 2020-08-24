@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { Schedule } from 'src/models/Schedule.model';
 import { ModalController } from '@ionic/angular';
@@ -9,6 +9,8 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./schedule-list.component.scss'],
 })
 export class ScheduleListComponent implements OnInit {
+  @Input() deviceCode: string;
+
   allSchedule = [];
   customPickerOptions: any;
 
@@ -36,9 +38,10 @@ export class ScheduleListComponent implements OnInit {
 
   ngOnInit() {
     this.scheduleService.allSchedule.subscribe(allSchedule => {
-      if (allSchedule.length > 0) {
+      let scheduleFilter = allSchedule.filter(item => item.deviceCode === this.deviceCode);
+      if (scheduleFilter.length > 0) {
         let allTimeSchedule = [];
-        for (let schedule of allSchedule) {
+        for (let schedule of scheduleFilter) {
           let timeScedule = schedule.timeSchedule;
           let subTimeSchedule = timeScedule.split(' ');
           
