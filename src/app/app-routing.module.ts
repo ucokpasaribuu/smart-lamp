@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
+import { PreventRedirectAuthGuard } from './auth/prevent-redirect-auth.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import ('./auth/auth.module').then( m => m.AuthPageModule ),
+    canLoad: [PreventRedirectAuthGuard]
   },
   {
     path: 'lamps',

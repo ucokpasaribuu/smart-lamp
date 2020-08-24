@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-  isLogin = true;
+  isLogin = false;
 
   constructor(
     private router: Router, 
@@ -18,11 +18,12 @@ export class AuthPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
-    if (this.authService.isAuth) {
-      this.router.navigateByUrl('lamps/tabs/lamp-list');
-    }
-  }
+  // ionViewWillEnter() {
+  //   if (this.authService.isAuth) {
+  //     this.router.navigateByUrl('lamps/tabs/lamp-list');
+  //     return;
+  //   }
+  // }
 
   onSubmit(form: NgForm) {
     this.authService.login(true);

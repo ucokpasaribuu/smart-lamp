@@ -7,6 +7,7 @@ import { SiteModel } from 'src/models/Site.model';
 
 import { IonRouterOutlet, Platform } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
+import { AuthService } from 'src/app/services/auth.service';
 const { App } = Plugins;
 
 @Component({
@@ -28,7 +29,8 @@ export class LampListPage implements OnInit {
     private router: Router,
     private loadingCtrl: LoadingController,
     private platform: Platform,
-    private routerOutlet: IonRouterOutlet) { }
+    private routerOutlet: IonRouterOutlet,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.currentUrl = this.router.url;
@@ -126,6 +128,7 @@ export class LampListPage implements OnInit {
         {
           text: 'Logout',
           handler: () => {
+            this.authService.logout(false);
             this.router.navigateByUrl('/auth');
           }
         },
