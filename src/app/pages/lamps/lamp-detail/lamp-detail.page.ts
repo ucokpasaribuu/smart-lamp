@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LamplistService } from 'src/app/services/lamplist.service';
 import { LampList } from 'src/models/LampList.model';
-import { LoadingController, AlertController, PickerController } from '@ionic/angular';
+import { LoadingController, AlertController, PickerController, ModalController } from '@ionic/angular';
 import { ScheduleService } from 'src/app/services/schedule.service';
+import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 
 @Component({
   selector: 'app-lamp-detail',
@@ -11,12 +12,13 @@ import { ScheduleService } from 'src/app/services/schedule.service';
   styleUrls: ['./lamp-detail.page.scss'],
 })
 export class LampDetailPage implements OnInit {
-
   isLoading = true;
   lampDetail: LampList;
   today: string;
   customPickerOptions: any;
   timeScheduler: any;
+  ionDateTimeValue: any;
+  defaultTime: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,24 +26,28 @@ export class LampDetailPage implements OnInit {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private router: Router,
-    private scheduleService: ScheduleService) { 
+    private scheduleService: ScheduleService,
+    private modalCtrl: ModalController,
+    private pickerCtrl: PickerController) { 
       this.customPickerOptions = {
         buttons: [
           {
             text: 'Cancel',
             handler: () => {
+              this.ionDateTimeValue = this.today;
             }
           },
           {
             text: 'Save',
-            handler: () => {
-              this.scheduleService.addSchedule(this.timeScheduler).subscribe(data => {
-                console.log(data);
-              })
+            handler: (value) => {
+              let dataTimePick = `${value.hour.text} ${value.minute.text} ${value.ampm.text}`;
+              this.scheduleService.addSchedule(dataTimePick).subscribe(data => {
+              });
             }
           }
         ]
-      }  
+      }
+
     }
 
   ngOnInit() {
@@ -51,8 +57,13 @@ export class LampDetailPage implements OnInit {
 
         this.isLoading = false;
         this.today = new Date().toISOString();
+        this.ionDateTimeValue = this.today;
       });
     });
+  }
+
+  test(value) {
+    this.today = value;
   }
 
   ionDateTimeSet() {
@@ -105,8 +116,16 @@ export class LampDetailPage implements OnInit {
     })
   }
 
-  setScheduler(value) {
-    this.timeScheduler = value;
+  openScheduleList() {
+    console.log('open schedule list');
+    this.modalCtrl.create({
+      component: ScheduleListComponent
+    }).then(modalEl => {
+      modalEl.present();
+      return modalEl.onDidDismiss();
+    }).then(resData => {
+      console.log(resData);
+    })
   }
 
 }
