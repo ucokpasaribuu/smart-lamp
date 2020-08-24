@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { Schedule } from 'src/models/Schedule.model';
 import { ModalController } from '@ionic/angular';
-import { parse } from 'path';
 
 @Component({
   selector: 'app-schedule-list',
