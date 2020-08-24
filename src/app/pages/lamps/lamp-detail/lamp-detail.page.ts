@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LamplistService } from 'src/app/services/lamplist.service';
 import { LampList } from 'src/models/LampList.model';
 import { LoadingController, AlertController, PickerController } from '@ionic/angular';
+import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
   selector: 'app-lamp-detail',
@@ -23,7 +24,7 @@ export class LampDetailPage implements OnInit {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private router: Router,
-    private pickerCtrl: PickerController) { 
+    private scheduleService: ScheduleService) { 
       this.customPickerOptions = {
         buttons: [
           {
@@ -34,7 +35,9 @@ export class LampDetailPage implements OnInit {
           {
             text: 'Save',
             handler: () => {
-              console.log(this.timeScheduler);
+              this.scheduleService.addSchedule(this.timeScheduler).subscribe(data => {
+                console.log(data);
+              })
             }
           }
         ]

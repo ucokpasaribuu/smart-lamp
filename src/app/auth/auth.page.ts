@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-auth',
@@ -13,17 +14,30 @@ export class AuthPage implements OnInit {
 
   constructor(
     private router: Router, 
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
   }
 
-  // ionViewWillEnter() {
-  //   if (this.authService.isAuth) {
-  //     this.router.navigateByUrl('lamps/tabs/lamp-list');
-  //     return;
-  //   }
-  // }
+  ionViewWillEnter() {
+    this.authService.isAuth.subscribe(isAuthenticate => {
+      if (isAuthenticate) {
+        this.loadingCtrl.create({
+          message: 'Loading ...'
+        }).then(loadingEl => {
+          loadingEl.present();
+  
+          setTimeout(() => {
+            this.router.navigateByUrl('lamps/tabs/lamp-list');
+            
+            loadingEl.dismiss();
+          }, 800);
+        })
+        return;
+      }
+    });
+  }
 
   onSubmit(form: NgForm) {
     this.authService.login(true);
