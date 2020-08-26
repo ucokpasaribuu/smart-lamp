@@ -6,6 +6,7 @@ import { LoadingController, AlertController, PickerController, ModalController }
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 
+
 @Component({
   selector: 'app-lamp-detail',
   templateUrl: './lamp-detail.page.html',

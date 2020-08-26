@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { LoadingController } from '@ionic/angular';
 
+import { Plugins } from '@capacitor/core';
+import { BackButtonEvent } from '@ionic/core';
+const { App } = Plugins;
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
@@ -22,19 +26,29 @@ export class AuthPage implements OnInit {
 
   ionViewWillEnter() {
     this.authService.isAuth.subscribe(isAuthenticate => {
+      console.log(isAuthenticate);
       if (isAuthenticate) {
-        this.loadingCtrl.create({
-          message: 'Loading ...'
-        }).then(loadingEl => {
-          loadingEl.present();
+        const routerEl = document.querySelector('ion-router');
+        document.addEventListener('ionBackButton', (ev: BackButtonEvent) => {
+          ev.detail.register(-1, () => {
+            const path = window.location.pathname;
+            if (path === routerEl.root) {
+              App.exitApp();
+            }
+          });
+        });
+        // this.loadingCtrl.create({
+        //   message: 'Loading ...'
+        // }).then(loadingEl => {
+        //   loadingEl.present();
   
-          setTimeout(() => {
-            this.router.navigateByUrl('lamps/tabs/lamp-list');
+        //   setTimeout(() => {
+        //     this.router.navigateByUrl('lamps/tabs/lamp-list');
             
-            loadingEl.dismiss();
-          }, 800);
-        })
-        return;
+        //     loadingEl.dismiss();
+        //   }, 800);
+        // })
+        // return;
       }
     });
   }
