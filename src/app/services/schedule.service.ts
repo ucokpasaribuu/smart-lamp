@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Schedule } from 'src/models/Schedule.model';
 import { BehaviorSubject } from 'rxjs';
 import { take, map, tap, switchMap } from 'rxjs/operators';
-import { Interface } from 'readline';
 
 export interface ScheduleInterface {
     id: number;
