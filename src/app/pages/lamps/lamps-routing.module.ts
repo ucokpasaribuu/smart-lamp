@@ -25,16 +25,12 @@ const routes: Routes = [
             ]
           },
           {
-            path: 'sites',
+            path: 'profile',
             children: [
               {
                 path: '',
-                loadChildren: () => import('./lamp-list/lamp-list.module').then(m => m.LampListPageModule)
-              },
-              {
-                path: ':deviceCode',
-                loadChildren: () => import('./lamp-detail/lamp-detail.module').then(m => m.LampDetailPageModule)
-              },
+                loadChildren: () => import('./../profile/profile.module').then(m => m.ProfilePageModule)
+              }
             ]
           }
         ]
