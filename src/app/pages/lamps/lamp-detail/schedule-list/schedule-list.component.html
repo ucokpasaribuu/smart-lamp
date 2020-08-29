@@ -1,6 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>All Schedule</ion-title>
+    <ion-title>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="onCancel()">
         <ion-icon name="close"></ion-icon>
@@ -26,11 +28,7 @@
     </ion-row>
     <ion-row *ngIf="allSchedule.length === 0" class="ion-justify-content-center">
       <ion-col class="ion-text-center">
-        Schedule not available
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate explicabo beatae inventore ipsum alias quasi non quae architecto rem laudantium, voluptatem repudiandae, repellat necessitatibus repellendus! Pariatur, minima! Placeat, quibusdam natus!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque possimus vero recusandae consequatur molestiae. Minus non ullam odit dolorum aliquid rerum. Nostrum, cum. Ad maiores aspernatur consequuntur velit iste placeat!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, aliquid nam. Odit incidunt, fugit officia, sit placeat commodi porro exercitationem libero fuga pariatur facere nulla aspernatur necessitatibus, blanditiis ipsam illum!
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic, temporibus. Ratione, illo non blanditiis reiciendis tenetur sapiente sunt optio et veritatis cum quis unde animi, pariatur quaerat consequatur neque sequi!
+        Schedule List has not been set
       </ion-col>
     </ion-row>
   </ion-grid>
