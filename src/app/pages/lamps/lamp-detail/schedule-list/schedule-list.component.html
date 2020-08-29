@@ -1,27 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-title>
-    <ion-buttons slot="primary">
-      <ion-button (click)="onCancel()">
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <ion-item>
+            <ion-buttons slot="start">
+              <ion-icon name="add-outline"></ion-icon>
+              <ion-datetime (click)="onUpdate(null)" [pickerOptions]="customPickerOptions" id="ionDateTime" displayFormat="h-mm-A" picker-format="h:mm A"></ion-datetime>
+            </ion-buttons>
+            <ion-buttons slot="end" (click)="onCancel()">
+              <ion-icon name="close"></ion-icon>
+            </ion-buttons>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let schedule of allSchedule">
+      <ion-col size="6" *ngFor="let schedule of allSchedule; let i = index;">
         <ion-card class="ion-padding">
           <div class="ion-text-center">
-            <ion-label>
+            <ion-label (click)="onUpdateTime(allScheduleId[i])">
               <ion-icon name="alarm-outline" style="font-size: 40px;"></ion-icon>
             </ion-label>
-            <ion-datetime [pickerOptions]="customPickerOptions" id="ionDateTime" display-format="h:mm A" picker-format="h:mm A" [value]="(schedule)"></ion-datetime>
-            <ion-button fill="outline">Remove</ion-button>
+            <ion-datetime (click)="onUpdate(allScheduleId[i])" [pickerOptions]="customPickerOptions" [id]="allScheduleId[i]" display-format="h:mm A" picker-format="h:mm A" [value]="(schedule)"></ion-datetime>
+            <ion-button fill="outline" (click)="removeSchedule(allScheduleId[i])">Remove</ion-button>
           </div>
         </ion-card>
       </ion-col>
