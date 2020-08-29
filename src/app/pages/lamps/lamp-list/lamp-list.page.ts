@@ -48,6 +48,7 @@ export class LampListPage implements OnInit {
 
   ionViewWillEnter() {
     this.currentUrl = this.router.url;
+    this.myTime = +(new Date().getHours()) < 18 ? 'day800' : 'night800';
 
     this.lampListService.getSites.subscribe(allSites => {
       this.allSite = allSites;

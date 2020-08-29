@@ -2,13 +2,18 @@ form {
     height: 100%;
 }
 
-#top, #bottom {
-    height: 18%;
+#imgAuth {
+    border-radius: 50% !important;
+    overflow: hidden;
 }
 
-#mid {
-    height: 50%;
-}
+// #top, #bottom {
+//     height: 18%;
+// }
+
+// #mid {
+//     height: 20%;
+// }
 
 #ionContent {
     --background: none;

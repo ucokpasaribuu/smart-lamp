@@ -48,6 +48,10 @@ export class LampDetailPage implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    this.myTime = +(new Date().getHours()) < 18 ? 'day800' : 'night800';
+  }
+
   ionDateTimeSet() {
     document.getElementById('ionDateTime').click();
   }
@@ -103,7 +107,8 @@ export class LampDetailPage implements OnInit {
     this.modalCtrl.create({
       component: ScheduleListComponent,
       cssClass: 'schedule-list',
-      componentProps: {deviceCode: this.lampDetail.device_code}
+      componentProps: {deviceCode: this.lampDetail.device_code},
+      backdropDismiss: false
     }).then(modalEl => {
       modalEl.present();
       return modalEl.onDidDismiss();

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-grid>
+  <ion-grid style="height: 50px; margin-bottom: 10px;">
     <ion-row class="ion-justify-content-center">
       <ion-col size="6" (click)="changeFilterSite()">
         <ion-tab-button>
@@ -16,9 +16,9 @@
     <ion-row>
       <ion-col size="6" *ngFor="let lamp of lampList; let i = index">
         <ion-card (click)="changeStatus(lamp.status, lamp.device_code, lamp.bat_name)" [id]="lamp.status === 1 ? 'onLamp' : 'offLamp'" class="ion-no-margin">
-          <ion-title class="ion-text-center">
-            <ion-label style="color: white;">{{ lamp.bat_name }}</ion-label>
-          </ion-title>
+          <ion-card-header class="ion-text-center">
+            <ion-note style="font-weight: bold; color: white;">{{ lamp.bat_name }}</ion-note>
+          </ion-card-header>
         </ion-card>
       </ion-col>
     </ion-row>
