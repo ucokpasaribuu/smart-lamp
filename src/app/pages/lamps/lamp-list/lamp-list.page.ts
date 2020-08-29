@@ -30,7 +30,8 @@ export class LampListPage implements OnInit {
     private loadingCtrl: LoadingController,
     private platform: Platform,
     private routerOutlet: IonRouterOutlet,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private actionSheetCtrl: ActionSheetController) { }
 
   ngOnInit() {
     this.currentUrl = this.router.url;
@@ -58,30 +59,35 @@ export class LampListPage implements OnInit {
     });
   }
 
-  changeStatus(status, deviceCode) {
+  changeStatus(status, deviceCode, lampName?) {
     let changeStatus = status === 1 ? 'off' : 'on';
     let updateStatus = status === 1 ? 2 : 1;
-    
+
     this.alertCtrl.create({
-      header: `Are you sure to turn ${changeStatus} this lamp?`,
+      header: 'Choose an action?',
+      cssClass: 'alert-lamp-list-action',
       buttons: [
         {
-          text: 'Okay',
+          text: `Turn ${changeStatus} ${lampName}`,
           handler: () => {
             this.updateLampStatus(deviceCode, updateStatus);
           }
         },
         {
+          text: `View Detail`,
+          handler: () => {
+            this.router.navigateByUrl(`${this.currentUrl}/${deviceCode}`);
+          }
+        },
+        {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-            this.updateLampStatus(deviceCode, status);
-          }
+          handler: () => {}
         }
       ]
     }).then(alertEl => {
       alertEl.present();
-    })
+    });
   }
 
   updateLampStatus(deviceCode, value) {
@@ -100,16 +106,59 @@ export class LampListPage implements OnInit {
     });
   }
 
-  changeFilterSite(value: CustomEvent<any>) {
-    this.filterSite = value.detail.value;
-    this.reloadFilterSite = true;
+  changeFilterSite () {
+    let inputFilterSite = [];
 
-    this.filterLampList(this.filterSite);
+    inputFilterSite.push({
+      type: 'radio',
+      label: 'All',
+      value: 'all',
+      checked: this.filterSite === 'all' ? true : false,
+      name: 'all',
+      placeholder: 'all',
+      id: 'all'
+    })
 
-    this.currentUrl = this.router.url;
+    for (let el of this.allSite) {
+      inputFilterSite.push(
+        {
+          type: 'radio',
+          label: el.site_name,
+          value: el.site_code,
+          checked: this.filterSite === el.site_code ? true : false,
+          name: el.site_code,
+          placeholder: el.site_name,
+          id: el.site_code
+        }
+      );
+    }
+    
+    this.alertCtrl.create({
+      header: `Choose Site?`,
+      cssClass: 'alert-change-filter',
+      inputs: inputFilterSite,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: data => {
+            this.filterLampList(data);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('filter was cancelled');
+          }
+        }
+      ]
+    }).then(alertEl => {
+      alertEl.present();
+    })
   }
 
   filterLampList(value) {
+    this.filterSite = value;
     this.loadingCtrl.create({
       message: 'Fetching Lamp List ...'
     }).then(loadingEl => {

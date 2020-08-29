@@ -16,10 +16,11 @@ export class LampDetailPage implements OnInit {
   isLoading = true;
   lampDetail: LampList;
   today: string;
-  customPickerOptions: any;
   timeScheduler: any;
   ionDateTimeValue: any;
   defaultTime: any;
+  myTime: any;
+  timePickerObj: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,25 +30,7 @@ export class LampDetailPage implements OnInit {
     private router: Router,
     private scheduleService: ScheduleService,
     private modalCtrl: ModalController,
-    private pickerCtrl: PickerController) { 
-      this.customPickerOptions = {
-        buttons: [
-          {
-            text: 'Cancel',
-            handler: () => {
-              this.ionDateTimeValue = this.today;
-            }
-          },
-          {
-            text: 'Save',
-            handler: (value) => {
-              let dataTimePick = `${value.hour.text} ${value.minute.text} ${value.ampm.text}`;
-              this.scheduleService.addSchedule(dataTimePick, this.lampDetail.device_code).subscribe(data => {
-              });
-            }
-          }
-        ]
-      }
+    private pickerCtrl: PickerController) {
 
     }
 
@@ -58,7 +41,7 @@ export class LampDetailPage implements OnInit {
 
         this.isLoading = false;
         this.today = new Date().toISOString();
-        this.ionDateTimeValue = this.today;
+        // this.myTime = this.today;
       });
     });
   }
@@ -121,6 +104,7 @@ export class LampDetailPage implements OnInit {
     console.log('open schedule list');
     this.modalCtrl.create({
       component: ScheduleListComponent,
+      cssClass: 'schedule-list',
       componentProps: {deviceCode: this.lampDetail.device_code}
     }).then(modalEl => {
       modalEl.present();

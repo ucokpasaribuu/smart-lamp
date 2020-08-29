@@ -9,12 +9,15 @@ import { LampDetailPageRoutingModule } from './lamp-detail-routing.module';
 import { LampDetailPage } from './lamp-detail.page';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 
+// import { IonicTimepickerModule } from '@logisticinfotech/ionic-timepicker';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LampDetailPageRoutingModule
+    LampDetailPageRoutingModule,
+    // IonicTimepickerModule
   ],
   declarations: [LampDetailPage, ScheduleListComponent]
 })

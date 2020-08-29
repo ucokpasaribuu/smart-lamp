@@ -24,3 +24,27 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.schedule-list > .modal-wrapper {
+    position: absolute; 
+    height: 70%;
+    width: 94%;
+    right: 3%;
+    left: 3%;
+    top: 15%;
+    bottom: 15%;
+    display: block; 
+}
+
+.alert-lamp-list-action > .alert-wrapper {
+ --ion-text-color: var(--ion-color-warning) !important;
+ align-items: center;
+}
+
+.alert-change-filter > .alert-wrapper {
+    --ion-text-color: var(--ion-color-medium-shade) !important;
+}
+
+.alert-lamp-list-action > .alert-wrapper > div, .alert-change-filter > .alert-wrapper > div {
+    align-items: center;
+}

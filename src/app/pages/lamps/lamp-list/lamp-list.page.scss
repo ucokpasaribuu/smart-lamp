@@ -1,0 +1,17 @@
+#onLamp {
+    --background: none;
+    height: 200px;
+    background-image: url('../../../../assets/lamp-list/bat.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#offLamp {
+    --background: none;
+    height: 200px;
+    background-image: url('../../../../assets/lamp-list/bat-sleep-png\ Comp\ 1.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
