@@ -40,14 +40,12 @@ export class LampDetailPage implements OnInit {
         this.lampDetail = data;
 
         this.isLoading = false;
+
+        this.myTime = +(new Date().getHours()) < 18 ? 'day800' : 'night800';
+
         this.today = new Date().toISOString();
-        // this.myTime = this.today;
       });
     });
-  }
-
-  test(value) {
-    this.today = value;
   }
 
   ionDateTimeSet() {

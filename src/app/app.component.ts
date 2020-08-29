@@ -24,15 +24,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadingCtrl.create({
-      message: 'Please wait ...'
-    }).then(loadingEl => {
-      loadingEl.present();
+    // this.loadingCtrl.create({
+    //   message: 'Please wait ...'
+    // }).then(loadingEl => {
+    //   loadingEl.present();
 
-      setTimeout(() => {
-        loadingEl.dismiss();
-      }, 500);
-    });
+    //   setTimeout(() => {
+    //     loadingEl.dismiss();
+    //   }, 500);
+    // });
   }
 
   initializeApp() {

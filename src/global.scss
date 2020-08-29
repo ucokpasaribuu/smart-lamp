@@ -48,3 +48,25 @@
 .alert-lamp-list-action > .alert-wrapper > div, .alert-change-filter > .alert-wrapper > div {
     align-items: center;
 }
+
+#day800 {
+    --background: none;
+    height: 200px;
+    background-image: url('./assets/background/day800.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    --ion-text-color: #000000;
+    font-size: 16px;
+}
+
+#night800 {
+    --background: none;
+    height: 200px;
+    background-image: url('./assets/background/night800.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    --ion-text-color: rgb(241, 235, 232);
+    font-size: 16px;
+}

@@ -22,6 +22,7 @@ export class LampListPage implements OnInit {
   allSite: SiteModel[];
   currentUrl: string;
   reloadFilterSite = false;
+  myTime: string;
 
   constructor(
     private lampListService: LamplistService,
@@ -35,6 +36,8 @@ export class LampListPage implements OnInit {
 
   ngOnInit() {
     this.currentUrl = this.router.url;
+
+    this.myTime = +(new Date().getHours()) < 18 ? 'day800' : 'night800';
 
     this.platform.backButton.subscribeWithPriority(-1, () => {
       if (!this.routerOutlet.canGoBack()) {
