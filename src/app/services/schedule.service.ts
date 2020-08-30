@@ -39,7 +39,6 @@ export class ScheduleService {
         return this.allSchedule.pipe(
             take(1),
             map(dataSchbeforeUpdate => {
-                console.log(dataSchbeforeUpdate)
                 let oldSchedule = [...dataSchbeforeUpdate];
                 let indexUpdate = dataSchbeforeUpdate.findIndex(el => el.id === newSchedule.id);
 
