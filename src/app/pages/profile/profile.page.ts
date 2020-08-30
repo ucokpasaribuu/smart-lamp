@@ -33,6 +33,8 @@ export class ProfilePage implements OnInit {
           this.email = data.value;
           this.myTime = +(new Date().getHours()) < 18 ? 'day800' : 'night800';
         })
+      } else {
+        this.email = data.email;
       }
     })
   }
