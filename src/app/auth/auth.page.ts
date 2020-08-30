@@ -37,24 +37,12 @@ export class AuthPage implements OnInit {
             }
           });
         });
-        // this.loadingCtrl.create({
-        //   message: 'Loading ...'
-        // }).then(loadingEl => {
-        //   loadingEl.present();
-  
-        //   setTimeout(() => {
-        //     this.router.navigateByUrl('lamps/tabs/lamp-list');
-            
-        //     loadingEl.dismiss();
-        //   }, 800);
-        // })
-        // return;
       }
     });
   }
 
   onSubmit(form: NgForm) {
-    this.authService.login(true);
+    this.authService.login(true, form.value);
     this.router.navigateByUrl('/lamps/tabs/lamp-list');
   }
 }
