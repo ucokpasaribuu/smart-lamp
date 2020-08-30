@@ -49,6 +49,46 @@ export class LamplistService {
       'Floor = 2, Room = 4, Spot = Atas Meja C',
       2
     ),
+    new LampList(
+      'Lampu D',
+      'WTCBAT2020062500001',
+      'Kosan Kelapa Dua, Jl, Kelapa Dua Barat No. 106 J',
+      'kelapa_dua',
+      'Floor = 2, Room = 4, Spot = Atas Meja Komputer',
+      1
+    ),
+    new LampList(
+      'Lampu E',
+      'WTCBAT2020062500002',
+      'Kosan Kelapa Dua, Jl, Kelapa Dua Barat No. 106 J',
+      'Kelapa Dua',
+      'Floor = 2, Room = 4, Spot = Atas Meja Komputer Floor = 2, Room = 4, Spot = Atas Meja Komputer',
+      2
+    ),
+    new LampList(
+      'Lampu F',
+      'WTCBAT2020062500003',
+      'Kosan depok, Jl, depok Barat No. 106 J',
+      'depok',
+      'Floor = 2, Room = 4, Spot = Atas Meja A',
+      2
+    ),
+    new LampList(
+      'Lampu G',
+      'WTCBAT2020062500004',
+      'Kosan depok, Jl, depok Barat No. 106 J',
+      'depok',
+      'Floor = 2, Room = 4, Spot = Atas Meja B',
+      1
+    ),
+    new LampList(
+      'Lampu H',
+      'WTCBAT2020062500005',
+      'Kosan depok, Jl, depok Barat No. 106 J',
+      'depok',
+      'Floor = 2, Room = 4, Spot = Atas Meja C',
+      2
+    ),
   ]);
 
   sites = new BehaviorSubject<SiteModel[]>([
@@ -62,6 +102,12 @@ export class LamplistService {
       'tebet',
       'Tebet',
       'Kosan depok, Jl, depok Barat No. 106 J',
+      'Floor = 2, Room = 4, Spot = Atas Meja C'
+    ),
+    new SiteModel(
+      'kelapa_dua',
+      'Kelapa Dua',
+      'Kosan Kelapa Dua, Jl, Kelapa Dua Barat No. 106 J',
       'Floor = 2, Room = 4, Spot = Atas Meja C'
     )
   ]);
