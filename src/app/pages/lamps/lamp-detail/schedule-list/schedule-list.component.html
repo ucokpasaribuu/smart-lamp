@@ -3,13 +3,17 @@
     <ion-row class="ion-justify-content-center">
       <ion-col>
         <ion-item>
-            <ion-buttons slot="start">
-              <ion-icon name="add-outline"></ion-icon>
-              <ion-datetime (click)="onUpdate(null)" [pickerOptions]="customPickerOptions" id="ionDateTime" displayFormat="h-mm-A" picker-format="h:mm A"></ion-datetime>
-            </ion-buttons>
-            <ion-buttons slot="end" (click)="onCancel()">
-              <ion-icon name="close"></ion-icon>
-            </ion-buttons>
+            <div slot="start">
+              <ion-buttons slot="start">
+                <ion-icon name="add-outline"></ion-icon>
+                <ion-datetime (click)="onUpdate(null)" [pickerOptions]="customPickerOptions" id="ionDateTime" displayFormat="h-mm-A" picker-format="h:mm A"></ion-datetime>
+              </ion-buttons>
+            </div>
+            <div (click)="onCancel()" slot="end">
+              <ion-buttons>
+                <ion-icon name="close"></ion-icon>
+              </ion-buttons>
+            </div>
         </ion-item>
       </ion-col>
     </ion-row>
