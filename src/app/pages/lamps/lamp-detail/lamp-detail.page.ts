@@ -52,6 +52,10 @@ export class LampDetailPage implements OnInit {
     this.myTime = +(new Date().getHours()) < 18 ? 'day800' : 'night800';
   }
 
+  ionViewDidLeave() {
+    this.modalCtrl.dismiss(null, 'cancel');
+  }
+
   ionDateTimeSet() {
     document.getElementById('ionDateTime').click();
   }
