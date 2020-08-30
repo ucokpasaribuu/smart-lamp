@@ -1,17 +1,37 @@
-#onLamp {
-    --background: none;
-    height: 200px;
-    background-image: url('../../../../assets/lamp-list/bat.gif');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+ion-card {
+    height: 160px;
+    background-color: rgb(0, 0, 0);
 }
 
-#offLamp {
-    --background: none;
-    height: 200px;
-    background-image: url('../../../../assets/lamp-list/bat-sleep-png\ Comp\ 1.gif');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+#noteWakeup, #noteSleep {
+    font-weight: bold;
+    // color: rgb(248, 104, 47);
+    color: white;
+    z-index: 200;
 }
+
+#sleep {
+    height: 126px;
+    width: auto;
+}
+
+#wakeup {
+}
+
+// #onLamp {
+//     --background: none;
+//     height: 160px;
+//     background-image: url('../../../../assets/lamp-list/bat.gif');
+//     background-position: center center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+// }
+
+// #offLamp {
+//     --background: none;
+//     height: 160px;
+//     background-image: url('../../../../assets/lamp-list/bat-sleep-png\ Comp\ 1.gif');
+//     background-position: center center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+// }

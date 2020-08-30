@@ -13,11 +13,12 @@
 
 <ion-content [id]="myTime">
   <ion-grid>
-    <ion-row>
+    <ion-row class="ion-align-items-stretch">
       <ion-col size="6" *ngFor="let lamp of lampList; let i = index">
         <ion-card (click)="changeStatus(lamp.status, lamp.device_code, lamp.bat_name)" [id]="lamp.status === 1 ? 'onLamp' : 'offLamp'" class="ion-no-margin">
           <ion-card-header class="ion-text-center">
-            <ion-note style="font-weight: bold; color: white;">{{ lamp.bat_name }}</ion-note>
+            <div><ion-note [id]="lamp.status === 1 ? 'noteWakeup' : 'noteSleep'">{{ lamp.bat_name }}</ion-note></div>
+            <img [id]="lamp.status === 1 ? 'wakeup' : 'sleep'" [src]="'../../../../assets/lamp-list/' + (lamp.status === 1 ? 'bat' : 'bat-sleep-png\ Comp\ 1') + '.gif'">
           </ion-card-header>
         </ion-card>
       </ion-col>
