@@ -1,37 +1,32 @@
-ion-card {
-    height: 160px;
-    background-color: rgb(0, 0, 0);
-}
-
-#noteWakeup, #noteSleep {
+#noteDay {
     font-weight: bold;
     // color: rgb(248, 104, 47);
     color: white;
-    z-index: 200;
+}
+
+#noteNight {
+    font-weight: bold;
+    color: black;
 }
 
 #sleep {
     height: 126px;
     width: auto;
+    opacity: 1;
 }
 
 #wakeup {
+    opacity: 1;
 }
 
-// #onLamp {
-//     --background: none;
-//     height: 160px;
-//     background-image: url('../../../../assets/lamp-list/bat.gif');
-//     background-position: center center;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-// }
+#dayCard {
+    height: 160px;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.9;
+}
 
-// #offLamp {
-//     --background: none;
-//     height: 160px;
-//     background-image: url('../../../../assets/lamp-list/bat-sleep-png\ Comp\ 1.gif');
-//     background-position: center center;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-// }
+#nightCard {
+    height: 160px;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.78;
+}

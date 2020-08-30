@@ -15,10 +15,12 @@
   <ion-grid>
     <ion-row class="ion-align-items-stretch">
       <ion-col size="6" *ngFor="let lamp of lampList; let i = index">
-        <ion-card (click)="changeStatus(lamp.status, lamp.device_code, lamp.bat_name)" [id]="lamp.status === 1 ? 'onLamp' : 'offLamp'" class="ion-no-margin">
+        <ion-card (click)="changeStatus(lamp.status, lamp.device_code, lamp.bat_name)" [id]="myTime === 'day800' ? 'dayCard' : 'nightCard'" class="ion-no-margin">
           <ion-card-header class="ion-text-center">
-            <div><ion-note [id]="lamp.status === 1 ? 'noteWakeup' : 'noteSleep'">{{ lamp.bat_name }}</ion-note></div>
-            <img [id]="lamp.status === 1 ? 'wakeup' : 'sleep'" [src]="'../../../../assets/lamp-list/' + (lamp.status === 1 ? 'bat' : 'bat-sleep-png\ Comp\ 1') + '.gif'">
+            <div><ion-note [id]="myTime === 'day800' ? 'noteDay' : 'noteNight'">{{ lamp.bat_name }}</ion-note></div>
+            <img *ngIf="myTime === 'day800'" [id]="lamp.status === 1 ? 'wakeup' : 'sleep'" [src]="'../../../../assets/lamp-list/' + (lamp.status === 1 ? 'bat' : 'bat-sleep-png\ Comp\ 1') + '.gif'">
+
+            <img *ngIf="myTime === 'night800'" [id]="lamp.status === 1 ? 'wakeup' : 'sleep'" [src]="'../../../../assets/lamp-list/' + (lamp.status === 1 ? 'wakeup' : 'sleep') + '.gif'">
           </ion-card-header>
         </ion-card>
       </ion-col>
